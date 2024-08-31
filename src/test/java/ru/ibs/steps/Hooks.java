@@ -86,11 +86,11 @@ public class Hooks {
             capabilities.setCapability("selenoid:options",selenoidOptions);
 
             driver = new RemoteWebDriver(remoteUrl, capabilities);
-            Thread.sleep(10000);
+          //  Thread.sleep(10000);
         }catch (MalformedURLException e) {
             throw new RuntimeException("Invalid remote URL", e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+       // } catch (InterruptedException e) {
+      //      throw new RuntimeException(e);
         }
     }
 
