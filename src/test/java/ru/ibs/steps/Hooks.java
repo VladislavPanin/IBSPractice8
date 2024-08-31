@@ -1,3 +1,4 @@
+/*
 package ru.ibs.steps;
 
 import io.cucumber.java.AfterAll;
@@ -8,8 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.FileInputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.Properties;
 
 
@@ -20,13 +25,12 @@ public class Hooks {
     private static int idPreviousProduct;
     @BeforeAll
     public static void setup() {
-        try (FileInputStream input = new FileInputStream("path/to/application.properties")) {
+        try (FileInputStream input = new FileInputStream("src/test/resources/application.properties")) {
             props.load(input);
             String driverType = props.getProperty("type.driver");
-            String selenoidUrl = props.getProperty("selenoid.url");
 
             if("remote".equalsIgnoreCase(driverType)) {
-                initRemoteDriver(selenoidUrl);
+                initRemoteDriver();
             } else {
                 ChromeOptions co = new ChromeOptions();
                 co.setBinary("D:\\opt\\chrome-win64.chrome.exe");
@@ -40,7 +44,7 @@ public class Hooks {
                 driver.get("http://149.154.71.152:8080/food");
             }
         } catch (Exception e){
-
+            System.out.println(e.getMessage());
         }
 
 
@@ -66,12 +70,18 @@ public class Hooks {
         return driver;
     }
 
-    public static void initRemoteDriver(String selenoidUrl){
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setBrowserName("chrome");
-        capabilities.setVersion("109.0");
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
+    public static void initRemoteDriver(){
+        try {
+            URL remoteUrl = new URL("http://149.154.71.152:4444/wd/hub");
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setBrowserName("chrome");
+            capabilities.setVersion("109.0");
+            capabilities.setCapability("enableVnc", true);
+            capabilities.setCapability("enableVideo", false);
+            driver = new RemoteWebDriver(remoteUrl, capabilities);
+        }catch (MalformedURLException e) {
+                throw new RuntimeException("Invalid remote URL", e);
+            }
     }
 
     @AfterAll
@@ -81,3 +91,4 @@ public class Hooks {
 
 
 }
+*/
