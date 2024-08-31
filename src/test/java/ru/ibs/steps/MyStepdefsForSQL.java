@@ -1,6 +1,6 @@
 package ru.ibs.steps;
 
-import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Р;
 import org.junit.jupiter.api.Assertions;
 import ru.ibs.db.ConfJDBC;
 import ru.ibs.db.ConfParamsForQueries;
@@ -10,7 +10,7 @@ import java.sql.*;
 
 public class MyStepdefsForSQL {
 
-    @И("Добавить товар в базу данных")
+    @Р("Р”РѕР±Р°РІРёС‚СЊ С‚РѕРІР°СЂ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…")
     public void addNewProductTest(){
         try (Connection conn =
                      DriverManager.getConnection(ConfJDBC.DB_URL, ConfJDBC.DB_USER, ConfJDBC.DB_PASSWORD)) {
@@ -45,7 +45,7 @@ public class MyStepdefsForSQL {
         }
     }
 
-    @И("Удалить товар")
+    @Р("РЈРґР°Р»РёС‚СЊ С‚РѕРІР°СЂ")
     public static void deleteRow(){
         try (Connection conn =
                      DriverManager.getConnection(ConfJDBC.DB_URL, ConfJDBC.DB_USER, ConfJDBC.DB_PASSWORD)) {

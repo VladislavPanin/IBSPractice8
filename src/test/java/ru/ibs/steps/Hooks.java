@@ -1,4 +1,4 @@
-/*
+
 package ru.ibs.steps;
 
 import io.cucumber.java.AfterAll;
@@ -15,6 +15,8 @@ import java.io.FileInputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 
@@ -31,6 +33,7 @@ public class Hooks {
 
             if("remote".equalsIgnoreCase(driverType)) {
                 initRemoteDriver();
+                driver.get("http://149.154.71.152:8080/food");
             } else {
                 ChromeOptions co = new ChromeOptions();
                 co.setBinary("D:\\opt\\chrome-win64.chrome.exe");
@@ -72,16 +75,23 @@ public class Hooks {
 
     public static void initRemoteDriver(){
         try {
+
             URL remoteUrl = new URL("http://149.154.71.152:4444/wd/hub");
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName("chrome");
-            capabilities.setVersion("109.0");
-            capabilities.setCapability("enableVnc", true);
-            capabilities.setCapability("enableVideo", false);
+            Map<String, Object> selenoidOptions = new HashMap<>();
+            selenoidOptions.put("browserName", "chrome");
+            selenoidOptions.put("browserVersion", "109.0");
+            selenoidOptions.put("enableVNC", true);
+            selenoidOptions.put("enableVideo", false);
+            capabilities.setCapability("selenoid:options",selenoidOptions);
+
             driver = new RemoteWebDriver(remoteUrl, capabilities);
+            Thread.sleep(10000);
         }catch (MalformedURLException e) {
-                throw new RuntimeException("Invalid remote URL", e);
-            }
+            throw new RuntimeException("Invalid remote URL", e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @AfterAll
@@ -91,4 +101,3 @@ public class Hooks {
 
 
 }
-*/
