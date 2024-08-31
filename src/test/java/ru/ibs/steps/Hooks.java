@@ -24,7 +24,8 @@ public class Hooks {
                 "\\auto-testing-qualit-sandbox\\src\\test\\resources\\chromedriver.exe");
 
         driver.manage().window().maximize();
-        driver.get("http://localhost:8080/food");
+        //driver.get("http://localhost:8080/food");
+        driver.get("http://149.154.71.152:8080/food");
     }
 
     static int findPreviousProductId() {
