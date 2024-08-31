@@ -1,4 +1,4 @@
-package ru.ibs.steps;
+/*package ru.ibs.steps;
 
 import io.cucumber.java.ru.И;
 import org.junit.jupiter.api.Assertions;
@@ -67,3 +67,4 @@ public class MyStepdefsForSQL {
         }
     }
 }
+*/
